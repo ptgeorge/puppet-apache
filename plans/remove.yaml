@@ -1,0 +1,15 @@
+steps:
+  - task: apache::ctl
+    target: pgeorge2c.mylabserver.com
+    description: "Shut down apache service"
+    parameters:
+      command: graceful-stop
+  - command: "cp /etc/httpd/logs/access_log /tmp/apache_access"
+    target: pgeorge2c.mylabserver.com
+    description: "Copy Apache access log"
+  - task: package
+    target: pgeorge2c.mylabserver.com
+    description: "Remove Apache"
+    parameters:
+      action: uninstall
+      name: httpd 
